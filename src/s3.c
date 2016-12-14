@@ -1057,7 +1057,7 @@ static void create_bucket(int argc, char **argv, int optindex)
     do {
         S3_create_bucket(protocolG, accessKeyIdG, secretAccessKeyG, 0,
                          0, bucketName, cannedAcl, locationConstraint, 0,
-                         &responseHandler, 0);
+                         0, &responseHandler, 0);
     } while (S3_status_is_retryable(statusG) && should_retry());
 
     if (statusG == S3StatusOK) {
@@ -2377,7 +2377,7 @@ static void put_object(int argc, char **argv, int optindex,
 
         do {
             S3_put_object(&bucketContext, key, contentLength, &putProperties, 0,
-                          &putObjectHandler, &data);
+                          0, &putObjectHandler, &data);
         } while (S3_status_is_retryable(statusG) && should_retry());
 
         if (data.infile) {
