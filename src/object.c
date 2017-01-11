@@ -269,6 +269,7 @@ void S3_get_object(const S3BucketContext *bucketContext, const char *key,
                    const S3GetConditions *getConditions,
                    uint64_t startByte, uint64_t byteCount,
                    S3RequestContext *requestContext,
+                   int timeoutMs,
                    const S3GetObjectHandler *handler, void *callbackData)
 {
     // Set up the RequestParams
@@ -297,7 +298,7 @@ void S3_get_object(const S3BucketContext *bucketContext, const char *key,
         handler->getObjectDataCallback,               // fromS3Callback
         handler->responseHandler.completeCallback,    // completeCallback
         callbackData,                                 // callbackData
-        0                                             // timeoutMs
+        timeoutMs                                     // timeoutMs
     };
 
     // Perform the request
@@ -309,6 +310,7 @@ void S3_get_object(const S3BucketContext *bucketContext, const char *key,
 
 void S3_head_object(const S3BucketContext *bucketContext, const char *key,
                     S3RequestContext *requestContext,
+                    int timeoutMs,
                     const S3ResponseHandler *handler, void *callbackData)
 {
     // Set up the RequestParams
@@ -337,7 +339,7 @@ void S3_head_object(const S3BucketContext *bucketContext, const char *key,
         0,                                            // fromS3Callback
         handler->completeCallback,                    // completeCallback
         callbackData,                                 // callbackData
-        0,                                            // timeoutMs
+        timeoutMs                                     // timeoutMs
     };
 
     // Perform the request
